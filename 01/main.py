@@ -4,9 +4,8 @@ import os
 
 this_dir = os.path.dirname(__file__)
 
-input_ = list()
 with open(this_dir + "/input", mode='r') as file:
-    input_ = [int(line.strip()) for line in file.readlines()]
+    input_ = [int(line.strip()) for line in file.readlines() if line]
 
 # print("\n".join([str(i) for i in input_]))
 
