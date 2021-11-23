@@ -10,20 +10,41 @@ with open(this_dir + "/input", mode='r') as file:
 length = len(input_[0])
 height = len(input_)
 
-i = 0
-j = 0
-tree_count = 0
+slopes = [
+    (1, 1),
+    (3, 1),
+    (5, 1),
+    (7, 1),
+    (1, 2)
+]
 
-while True:
-    j += 3
-    j = j % length
-    i += 1
 
-    if i >= height:
-        break
+def count_trees(slope):
+    right = slope[0]
+    down = slope[1]
+    i = 0
+    j = 0
+    tree_count = 0
 
-    char = input_[i][j]
-    if char == "#":
-        tree_count += 1
+    while True:
+        j += right
+        j = j % length
+        i += down
 
-print(tree_count)
+        if i >= height:
+            break
+
+        char = input_[i][j]
+        if char == "#":
+            tree_count += 1
+
+    return tree_count
+
+
+counts = [count_trees(slope) for slope in slopes]
+product = 1
+for count in counts:
+    product *= count
+
+print(counts)
+print(product)
